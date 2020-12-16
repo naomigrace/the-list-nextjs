@@ -27,7 +27,7 @@ export default function Index({ category, actions, preview }) {
   );
 }
 
-export async function getStaticProps({ params, preview = null }) {
+export async function getServerSideProps({ params, preview = null }) {
   const { actions } = await getActionsByCategory(params.category, preview);
 
   return {
@@ -39,10 +39,10 @@ export async function getStaticProps({ params, preview = null }) {
   };
 }
 
-export async function getStaticPaths() {
-  const { categories } = await getAllCategoryTitles();
-  return {
-    paths: categories?.map((category) => `/category/${category.slug}`) || [],
-    fallback: true,
-  };
-}
+// export async function getStaticPaths() {
+//   const { categories } = await getAllCategoryTitles();
+//   return {
+//     paths: categories?.map((category) => `/category/${category.slug}`) || [],
+//     fallback: true,
+//   };
+// }

@@ -30,7 +30,7 @@ export default function Index({ neighborhoods, preview }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const { neighborhoods } = (await getAllNeighborhoodNames()) || [];
   return {
     props: { neighborhoods },

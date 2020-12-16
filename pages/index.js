@@ -54,7 +54,7 @@ export default function Index({ allActions, preview }) {
   );
 }
 
-export async function getStaticProps({ preview = null }) {
+export async function getServerSideProps({ preview = null }) {
   const { actions } = (await getAllActions(preview)) || [];
   return {
     props: { allActions: actions, preview },

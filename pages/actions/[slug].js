@@ -88,7 +88,7 @@ export default function Post({ action, moreActions, preview }) {
   );
 }
 
-export async function getStaticProps({ params, preview = null }) {
+export async function getServerSideProps({ params, preview = null }) {
   const data = await getActionAndMoreActions(params.slug, preview);
   const content = await markdownToHtml(data?.actions[0]?.description || "");
 
@@ -104,10 +104,10 @@ export async function getStaticProps({ params, preview = null }) {
   };
 }
 
-export async function getStaticPaths() {
-  const { actions } = await getAllActionsWithSlug();
-  return {
-    paths: actions?.map((action) => `/actions/${action.slug}`) || [],
-    fallback: true,
-  };
-}
+// export async function getStaticPaths() {
+//   const { actions } = await getAllActionsWithSlug();
+//   return {
+//     paths: actions?.map((action) => `/actions/${action.slug}`) || [],
+//     fallback: true,
+//   };
+// }

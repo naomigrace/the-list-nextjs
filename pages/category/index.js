@@ -31,7 +31,7 @@ export default function Index({ categories, preview }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const { categories } = (await getAllCategoryTitles()) || [];
   return {
     props: { categories },

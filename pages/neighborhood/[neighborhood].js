@@ -27,7 +27,7 @@ export default function Index({ neighborhood, actions, preview }) {
   );
 }
 
-export async function getStaticProps({ params, preview = null }) {
+export async function getServerSideProps({ params, preview = null }) {
   const { actions } = await getActionsByNeighborhood(
     params.neighborhood,
     preview
@@ -42,13 +42,13 @@ export async function getStaticProps({ params, preview = null }) {
   };
 }
 
-export async function getStaticPaths() {
-  const { neighborhoods } = await getAllNeighborhoodNames();
-  return {
-    paths:
-      neighborhoods?.map(
-        (neighborhood) => `/neighborhood/${neighborhood.slug}`
-      ) || [],
-    fallback: true,
-  };
-}
+// export async function getStaticPaths() {
+//   const { neighborhoods } = await getAllNeighborhoodNames();
+//   return {
+//     paths:
+//       neighborhoods?.map(
+//         (neighborhood) => `/neighborhood/${neighborhood.slug}`
+//       ) || [],
+//     fallback: true,
+//   };
+// }

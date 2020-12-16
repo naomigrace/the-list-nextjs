@@ -47,9 +47,7 @@ export default function ActionTable({ actions }) {
         </tr>
       </thead>
       <tbody className="bg-white divide-y divide-gray-200">
-        {actions.map((action) => (
-          <Action {...action} />
-        ))}
+        {actions && actions.map((action) => <Action {...action} />)}
       </tbody>
     </table>
   );
