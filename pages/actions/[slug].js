@@ -7,11 +7,7 @@ import Header from "@/components/header";
 import PostHeader from "@/components/post-header";
 import SectionSeparator from "@/components/section-separator";
 import Layout from "@/components/layout";
-import {
-  getActionAndMoreActions,
-  getAllActionsWithSlug,
-  getPostAndmoreActions,
-} from "@/lib/api";
+import { getActionAndMoreActions } from "@/lib/api";
 import PostTitle from "@/components/post-title";
 import Head from "next/head";
 import { CMS_NAME } from "@/lib/constants";
@@ -103,11 +99,3 @@ export async function getServerSideProps({ params, preview = null }) {
     },
   };
 }
-
-// export async function getStaticPaths() {
-//   const { actions } = await getAllActionsWithSlug();
-//   return {
-//     paths: actions?.map((action) => `/actions/${action.slug}`) || [],
-//     fallback: true,
-//   };
-// }
