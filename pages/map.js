@@ -1,14 +1,13 @@
 import { useState } from "react";
 import Container from "@/components/container";
 import Layout from "@/components/layout";
-import { getAllActions } from "@/lib/api";
+import { getAllMarkers } from "@/lib/api";
 import Head from "next/head";
 import { CMS_NAME } from "@/lib/constants";
 import Header from "@/components/header";
 import PostTitle from "@/components/post-title";
 import MapGL, { Layer, Popup, Source } from "@urbica/react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import actionsToGeoJson from "@/lib/actionsToGeoJson";
 import { useRouter } from "next/router";
 
 export default function Index({ markers, MAPBOX_TOKEN }) {
@@ -42,11 +41,7 @@ export default function Index({ markers, MAPBOX_TOKEN }) {
           zoom={viewport.zoom}
           onViewportChange={setViewport}
         >
-          <Source
-            id="actions"
-            type="geojson"
-            data={{ type: "FeatureCollection", features: markers }}
-          />
+          <Source id="actions" type="geojson" data={markers} />
           <Layer
             id="points"
             type="circle"
@@ -88,14 +83,12 @@ export default function Index({ markers, MAPBOX_TOKEN }) {
 }
 
 export async function getServerSideProps() {
-  const { actions } = (await getAllActions()) || [];
-
-  const markers =
-    (await actionsToGeoJson(actions, process.env.GOOGLE_API_KEY)) || [];
-
+  const { actions } = (await getAllMarkers()) || [];
+  const features = actions.map((action) => action.geojson);
+  console.log(features);
   return {
     props: {
-      markers,
+      markers: { type: "FeatureCollection", features },
       MAPBOX_TOKEN: process.env.MAPBOX_TOKEN,
     },
   };
