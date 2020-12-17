@@ -14,7 +14,7 @@ export default function Action(action) {
       </td>
       <td className="px-6 py-4 whitespace-nowrap">
         {action.categories.map((category) => (
-          <CategoryTag>{category.title}</CategoryTag>
+          <CategoryTag key={category.title}>{category.title}</CategoryTag>
         ))}
       </td>
       <td className="px-6 py-4 whitespace-nowrap">

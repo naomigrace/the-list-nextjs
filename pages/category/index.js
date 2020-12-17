@@ -16,7 +16,7 @@ export default function Index({ categories, preview }) {
       <Container>
         <Header />
         <PostTitle>Categories.</PostTitle>
-        <section className="flex-col md:flex-row flex space-y-6 md:space-y-0 md:space-x-6 items-center md:justify-between mt-16 mb-16 md:mb-12">
+        <section className="grid gap-4 grid-cols-3 mb-16 md:mb-12">
           {categories.map((category) => (
             <CoverImage
               imageUrl={category.cover.url}

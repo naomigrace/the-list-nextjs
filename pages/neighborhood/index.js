@@ -19,6 +19,7 @@ export default function Index({ neighborhoods, preview }) {
         <section className="flex flex-wrap  items-center md:justify-between mt-16 mb-16 md:mb-12">
           {neighborhoods.map((n) => (
             <ColorLink
+              key={n.name}
               href={`neighborhood/[neighborhood]`}
               as={`neighborhood/${n.slug}`}
               title={n.name}

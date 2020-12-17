@@ -18,7 +18,7 @@ export default function Index({ allActions, images, preview }) {
         <Intro />
         <h2 className="text-xl font-bold uppercase mb-4 mt-16">ACTIONS BY</h2>
 
-        <section className="flex-col md:flex-row flex space-y-6 md:space-y-0 md:space-x-6 items-center md:justify-between  mb-16 md:mb-12">
+        <section className="grid gap-4 grid-cols-3 mb-16 md:mb-12">
           <CoverImage
             title="Category"
             imageUrl={images.category}
