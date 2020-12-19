@@ -48,7 +48,22 @@ export default function Index({ markers, MAPBOX_TOKEN }) {
             source="actions"
             paint={{
               "circle-radius": 20,
-              "circle-color": "#000000",
+              "circle-opacity": 0.75,
+              "circle-color": [
+                "match",
+                ["get", "category"],
+                "Restaurants and Bars",
+                "#7C3AED",
+                "Speakeasies",
+                "#2563EB",
+                "Activities",
+                "#10B981",
+                "Coffee Shops",
+                "#F59E0B",
+                "Museums",
+                "#EC4899",
+                "#000",
+              ],
             }}
             onHover={(event) => {
               setPopupCoordinates(event.lngLat);
