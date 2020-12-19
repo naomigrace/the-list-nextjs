@@ -16,7 +16,6 @@ export default function Index({ allActions, images, preview }) {
 
       <Container>
         <Intro />
-        <h2 className="text-xl font-bold uppercase mb-4 mt-16">ACTIONS BY</h2>
 
         <section className="grid gap-4 grid-cols-3 mb-16 md:mb-12">
           <CoverImage
@@ -43,11 +42,6 @@ export default function Index({ allActions, images, preview }) {
             via=""
             to="to-teal-500"
           />
-        </section>
-
-        <h2 className="text-xl font-bold uppercase mb-5">All Actions</h2>
-        <section>
-          <ActionTable actions={allActions} />
         </section>
       </Container>
     </Layout>

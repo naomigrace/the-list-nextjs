@@ -17,7 +17,7 @@ export function PendingTag() {
 export function CategoryTag(props) {
   return (
     <span
-      className="px-2 py-1 inline-flex text-xs leading-tight font-semibold rounded-lg bg-gray-800 text-white"
+      className="px-2 py-1 inline-flex text-xs leading-tight font-semibold rounded-lg bg-gray-800 text-white mr-1"
       {...props}
     />
   );

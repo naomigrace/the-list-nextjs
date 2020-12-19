@@ -1,10 +1,15 @@
 import Link from "next/link";
 import { CategoryTag, CompletedTag, PendingTag } from "./tags";
 
-export default function Action(action) {
+export default function Action({ action, category = "restaurants-and-books" }) {
   return (
     <tr key={action.title}>
-      <td />
+      {category === "movies" ||
+        (category === "books" && action.year && (
+          <td className="px-6 py-4 whitespace-nowrap">
+            <div className="text-sm text-gray-900">{action.year}</div>
+          </td>
+        ))}
       <td className="px-6 py-4 whitespace-nowrap">
         <div className="text-sm text-gray-900">{action.title}</div>
       </td>
