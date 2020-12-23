@@ -6,6 +6,7 @@ import { CMS_NAME } from "@/lib/constants";
 import Header from "@/components/header";
 import PostTitle from "@/components/post-title";
 import CoverImage from "@/components/cover-image";
+import SectionGrid from "@/components/section-grid";
 
 export default function Index({ categories, preview }) {
   return (
@@ -16,7 +17,7 @@ export default function Index({ categories, preview }) {
       <Container>
         <Header />
         <PostTitle>Categories.</PostTitle>
-        <section className="grid gap-4 grid-cols-3 mb-16 md:mb-12">
+        <SectionGrid>
           {categories.map((category) => (
             <CoverImage
               imageUrl={category.cover.url}
@@ -25,7 +26,7 @@ export default function Index({ categories, preview }) {
               title={category.title}
             />
           ))}
-        </section>
+        </SectionGrid>
       </Container>
     </Layout>
   );

@@ -6,7 +6,12 @@ import Head from "next/head";
 import { CMS_NAME } from "@/lib/constants";
 import Header from "@/components/header";
 import PostTitle from "@/components/post-title";
-import MapGL, { Layer, Popup, Source } from "@urbica/react-map-gl";
+import MapGL, {
+  FullscreenControl,
+  Layer,
+  Popup,
+  Source,
+} from "@urbica/react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useRouter } from "next/router";
 
@@ -34,7 +39,7 @@ export default function Index({ markers, MAPBOX_TOKEN }) {
         <MapGL
           className="rounded-md"
           style={{ width: "100%", height: "600px" }}
-          mapStyle="mapbox://styles/naomigracep/ckis6j99z0nm519p3ekfv34io"
+          mapStyle="mapbox://styles/naomigracep/ckj15avud1i1u19o19fjvdp14"
           accessToken={MAPBOX_TOKEN}
           latitude={viewport.latitude}
           longitude={viewport.longitude}
@@ -91,6 +96,7 @@ export default function Index({ markers, MAPBOX_TOKEN }) {
               <p className="font-bold text-lg">{popupFeature.title}</p>
             </Popup>
           )}
+          <FullscreenControl position="top-right" />
         </MapGL>
       </Container>
     </Layout>

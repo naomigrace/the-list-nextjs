@@ -6,6 +6,7 @@ import Head from "next/head";
 import { CMS_NAME } from "@/lib/constants";
 import CoverImage from "@/components/cover-image";
 import ActionTable from "@/components/action-table";
+import SectionGrid from "@/components/section-grid";
 
 export default function Index({ allActions, images, preview }) {
   return (
@@ -16,8 +17,7 @@ export default function Index({ allActions, images, preview }) {
 
       <Container>
         <Intro />
-
-        <section className="grid gap-4 grid-cols-3 mb-16 md:mb-12">
+        <SectionGrid>
           <CoverImage
             title="Category"
             imageUrl={images.category}
@@ -42,7 +42,15 @@ export default function Index({ allActions, images, preview }) {
             via=""
             to="to-teal-500"
           />
-        </section>
+          <CoverImage
+            title="Vacations"
+            imageUrl={images.vacations}
+            href="/vacations"
+            from="from-blue-600"
+            via=""
+            to="to-teal-500"
+          />
+        </SectionGrid>
       </Container>
     </Layout>
   );
@@ -58,6 +66,7 @@ export async function getServerSideProps({ preview = null }) {
         category: homepage.category.formats.small.url,
         neighborhood: homepage.neighborhood.formats.small.url,
         map: homepage.map.formats.small.url,
+        vacations: homepage.vacations.formats.small.url,
       },
       preview,
     },
