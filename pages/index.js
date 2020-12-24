@@ -5,8 +5,8 @@ import { getAllActions, getHomepageImages } from "@/lib/api";
 import Head from "next/head";
 import { CMS_NAME } from "@/lib/constants";
 import CoverImage from "@/components/cover-image";
-import ActionTable from "@/components/action-table";
 import SectionGrid from "@/components/section-grid";
+import cookies from "next-cookies";
 
 export default function Index({ allActions, images, preview }) {
   return (
@@ -56,19 +56,29 @@ export default function Index({ allActions, images, preview }) {
   );
 }
 
-export async function getServerSideProps({ preview = null }) {
-  const { actions } = (await getAllActions(preview)) || [];
-  const { homepage } = (await getHomepageImages()) || [];
-  return {
-    props: {
-      allActions: actions,
-      images: {
-        category: homepage.category.formats.small.url,
-        neighborhood: homepage.neighborhood.formats.small.url,
-        map: homepage.map.formats.small.url,
-        vacations: homepage.vacations.formats.small.url,
+export async function getServerSideProps({ preview = null, res, ...ctx }) {
+  const { jwt } = cookies(ctx);
+  try {
+    const { actions } = (await getAllActions(jwt)) || [];
+    const { homepage } = (await getHomepageImages(jwt)) || [];
+    return {
+      props: {
+        allActions: actions,
+        images: {
+          category: homepage.category.formats.small.url,
+          neighborhood: homepage.neighborhood.formats.small.url,
+          map: homepage.map.formats.small.url,
+          vacations: homepage.vacations.formats.small.url,
+        },
+        preview,
       },
-      preview,
-    },
+    };
+  } catch (e) {
+    console.log("ERROR", e);
+    res.writeHead(302, { Location: "/login" });
+    res.end();
+  }
+  return {
+    props: {},
   };
 }

@@ -6,6 +6,7 @@ import { CMS_NAME } from "@/lib/constants";
 import ActionTable from "@/components/action-table";
 import Header from "@/components/header";
 import PostTitle from "@/components/post-title";
+import cookies from "next-cookies";
 
 export default function Index({ category, actions, preview }) {
   return (
@@ -27,22 +28,29 @@ export default function Index({ category, actions, preview }) {
   );
 }
 
-export async function getServerSideProps({ params, preview = null }) {
-  const { actions } = await getActionsByCategory(params.category, preview);
+export async function getServerSideProps({
+  params,
+  preview = null,
+  res,
+  ...ctx
+}) {
+  const { jwt } = cookies(ctx);
+  const { actions } = await getActionsByCategory(jwt, params.category, preview);
 
+  try {
+    return {
+      props: {
+        preview,
+        category: params.category,
+        actions,
+      },
+    };
+  } catch (e) {
+    console.log("ERROR", e);
+    res.writeHead(302, { Location: "/login" });
+    res.end();
+  }
   return {
-    props: {
-      preview,
-      category: params.category,
-      actions,
-    },
+    props: {},
   };
 }
-
-// export async function getStaticPaths() {
-//   const { categories } = await getAllCategoryTitles();
-//   return {
-//     paths: categories?.map((category) => `/category/${category.slug}`) || [],
-//     fallback: true,
-//   };
-// }

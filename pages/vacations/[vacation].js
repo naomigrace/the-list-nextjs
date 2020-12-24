@@ -14,6 +14,7 @@ import { CMS_NAME } from "@/lib/constants";
 import markdownToHtml from "@/lib/markdownToHtml";
 import PostImage from "@/components/post-image";
 import { CategoryTag, CompletedTag, PendingTag } from "@/components/tags";
+import cookies from "next-cookies";
 
 export default function Vacation({ vacation, moreVacations, preview }) {
   const router = useRouter();
@@ -78,18 +79,33 @@ export default function Vacation({ vacation, moreVacations, preview }) {
   );
 }
 
-export async function getServerSideProps({ params, preview = null }) {
-  const data = await getVacationAndMoreVacations(params.slug, preview);
-  const content = await markdownToHtml(data?.vacations[0]?.description || "");
+export async function getServerSideProps({
+  params,
+  preview = null,
+  res,
+  ...ctx
+}) {
+  const { jwt } = cookies(ctx);
+  try {
+    const data = await getVacationAndMoreVacations(jwt, params.slug, preview);
+    const content = await markdownToHtml(data?.vacations[0]?.description || "");
 
-  return {
-    props: {
-      preview,
-      vacation: {
-        ...data?.vacations[0],
-        content,
+    return {
+      props: {
+        preview,
+        vacation: {
+          ...data?.vacations[0],
+          content,
+        },
+        moreVacations: data?.moreVacations,
       },
-      moreVacations: data?.moreVacations,
-    },
+    };
+  } catch (e) {
+    console.log("ERROR", e);
+    res.writeHead(302, { Location: "/login" });
+    res.end();
+  }
+  return {
+    props: {},
   };
 }

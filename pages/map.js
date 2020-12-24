@@ -14,6 +14,7 @@ import MapGL, {
 } from "@urbica/react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useRouter } from "next/router";
+import cookies from "next-cookies";
 
 export default function Index({ markers, MAPBOX_TOKEN }) {
   const [viewport, setViewport] = useState({
@@ -103,14 +104,23 @@ export default function Index({ markers, MAPBOX_TOKEN }) {
   );
 }
 
-export async function getServerSideProps() {
-  const { actions } = (await getAllMarkers()) || [];
-  const features = actions.map((action) => action.geojson);
-  console.log(features);
+export async function getServerSideProps({ res, ...ctx }) {
+  const { jwt } = cookies(ctx);
+  try {
+    const { actions } = (await getAllMarkers(jwt)) || [];
+    const features = actions.map((action) => action.geojson);
+    return {
+      props: {
+        markers: { type: "FeatureCollection", features },
+        MAPBOX_TOKEN: process.env.MAPBOX_TOKEN,
+      },
+    };
+  } catch (e) {
+    console.log("ERROR", e);
+    res.writeHead(302, { Location: "/login" });
+    res.end();
+  }
   return {
-    props: {
-      markers: { type: "FeatureCollection", features },
-      MAPBOX_TOKEN: process.env.MAPBOX_TOKEN,
-    },
+    props: {},
   };
 }

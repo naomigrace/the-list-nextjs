@@ -6,6 +6,7 @@ import { CMS_NAME } from "@/lib/constants";
 import ActionTable from "@/components/action-table";
 import Header from "@/components/header";
 import PostTitle from "@/components/post-title";
+import cookies from "next-cookies";
 
 export default function Index({ neighborhood, actions, preview }) {
   return (
@@ -27,28 +28,33 @@ export default function Index({ neighborhood, actions, preview }) {
   );
 }
 
-export async function getServerSideProps({ params, preview = null }) {
-  const { actions } = await getActionsByNeighborhood(
-    params.neighborhood,
-    preview
-  );
+export async function getServerSideProps({
+  params,
+  preview = null,
+  res,
+  ...ctx
+}) {
+  const { jwt } = cookies(ctx);
+  try {
+    const { actions } = await getActionsByNeighborhood(
+      jwt,
+      params.neighborhood,
+      preview
+    );
 
+    return {
+      props: {
+        preview,
+        neighborhood: params.neighborhood,
+        actions,
+      },
+    };
+  } catch (e) {
+    console.log("ERROR", e);
+    res.writeHead(302, { Location: "/login" });
+    res.end();
+  }
   return {
-    props: {
-      preview,
-      neighborhood: params.neighborhood,
-      actions,
-    },
+    props: {},
   };
 }
-
-// export async function getStaticPaths() {
-//   const { neighborhoods } = await getAllNeighborhoodNames();
-//   return {
-//     paths:
-//       neighborhoods?.map(
-//         (neighborhood) => `/neighborhood/${neighborhood.slug}`
-//       ) || [],
-//     fallback: true,
-//   };
-// }

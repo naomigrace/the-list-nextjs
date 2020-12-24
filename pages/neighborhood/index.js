@@ -6,6 +6,7 @@ import { CMS_NAME } from "@/lib/constants";
 import ColorLink from "@/components/color-link";
 import Header from "@/components/header";
 import PostTitle from "@/components/post-title";
+import cookies from "next-cookies";
 
 export default function Index({ neighborhoods, preview }) {
   return (
@@ -31,9 +32,19 @@ export default function Index({ neighborhoods, preview }) {
   );
 }
 
-export async function getServerSideProps() {
-  const { neighborhoods } = (await getAllNeighborhoodNames()) || [];
+export async function getServerSideProps({ res, ...ctx }) {
+  const { jwt } = cookies(ctx);
+  try {
+    const { neighborhoods } = (await getAllNeighborhoodNames(jwt)) || [];
+    return {
+      props: { neighborhoods },
+    };
+  } catch (e) {
+    console.log("ERROR", e);
+    res.writeHead(302, { Location: "/login" });
+    res.end();
+  }
   return {
-    props: { neighborhoods },
+    props: {},
   };
 }

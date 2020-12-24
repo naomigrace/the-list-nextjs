@@ -7,6 +7,7 @@ import Header from "@/components/header";
 import PostTitle from "@/components/post-title";
 import CoverImage from "@/components/cover-image";
 import SectionGrid from "@/components/section-grid";
+import cookies from "next-cookies";
 
 export default function Index({ vacations, preview }) {
   return (
@@ -32,9 +33,19 @@ export default function Index({ vacations, preview }) {
   );
 }
 
-export async function getServerSideProps() {
-  const { vacations } = (await getAllVacationTitles()) || [];
+export async function getServerSideProps({ res, ...ctx }) {
+  const { jwt } = cookies(ctx);
+  try {
+    const { vacations } = (await getAllVacationTitles(jwt)) || [];
+    return {
+      props: { vacations },
+    };
+  } catch (e) {
+    console.log("ERROR", e);
+    res.writeHead(302, { Location: "/login" });
+    res.end();
+  }
   return {
-    props: { vacations },
+    props: {},
   };
 }
