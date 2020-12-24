@@ -17,7 +17,7 @@ export default function Action({ action, category = "restaurants-and-books" }) {
         <td className="px-6 py-4 whitespace-nowrap">
           <div className="text-sm text-gray-900">{action.location}</div>
           <div className="text-sm text-gray-500">
-            {action.neighborhood.name}
+            {action.neighborhood && action.neighborhood.name}
           </div>
         </td>
         <td className="px-6 py-4 whitespace-nowrap">
