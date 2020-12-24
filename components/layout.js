@@ -14,7 +14,7 @@ export default function Layout({ preview, children, className }) {
       <Meta />
       <div className="min-h-screen px-4 pb-12">
         {username && (
-          <div className="fixed top-0 right-0 p-4">
+          <div className="fixed top-0 right-0 p-4 z-50">
             <div className="relative inline-block text-left">
               <div>
                 <Avatar

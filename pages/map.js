@@ -22,7 +22,7 @@ export default function Index({ markers, MAPBOX_TOKEN }) {
         <section className="rounded-md border shadow-sm border-gray-100 p-2 mb-10">
           <div className="flex flex-wrap gap-x-6 ">
             {Object.keys(CATEGORY_COLORS_TAILWIND).map((category) => (
-              <div className="flex p-2 gap-x-2">
+              <div className="flex p-2 gap-x-2" key={category}>
                 <div
                   className={`rounded-full w-12 h-12 bg-${CATEGORY_COLORS_TAILWIND[category]}`}
                 />
