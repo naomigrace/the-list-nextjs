@@ -2,7 +2,7 @@ import Container from "@/components/container";
 import Layout from "@/components/layout";
 import { getAllCategoryTitles } from "@/lib/api";
 import Head from "next/head";
-import { CMS_NAME } from "@/lib/constants";
+import { CATEGORY_COLORS_TAILWIND, CMS_NAME } from "@/lib/constants";
 import Header from "@/components/header";
 import PostTitle from "@/components/post-title";
 import CoverImage from "@/components/cover-image";
@@ -25,6 +25,7 @@ export default function Index({ categories, preview }) {
               href={`/category/[category]`}
               as={`/category/${category.slug}`}
               title={category.title}
+              color={CATEGORY_COLORS_TAILWIND[category.slug]}
             />
           ))}
         </SectionGrid>

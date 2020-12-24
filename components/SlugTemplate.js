@@ -31,7 +31,7 @@ export default function SlugTemplate({
         <Header />
 
         <PostTitle>{whichType}</PostTitle>
-        <div className="sticky top-0 ... bg-white py-2 -mt-6 mb-4 z-40 flex gap-x-4 tracking-widest w-full text-gray-400">
+        <div className="sticky top-0 py-2 -mt-6 mb-4 z-10 flex gap-x-4 tracking-widest w-full text-gray-400">
           {whichType}
           <a href="#covers" className="font-bold">
             covers

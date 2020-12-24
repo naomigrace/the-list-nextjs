@@ -2,7 +2,7 @@ import Container from "@/components/container";
 import Layout from "@/components/layout";
 import { getAllMarkers } from "@/lib/api";
 import Head from "next/head";
-import { CMS_NAME } from "@/lib/constants";
+import { CATEGORY_COLORS_TAILWIND, CMS_NAME } from "@/lib/constants";
 import Header from "@/components/header";
 import PostTitle from "@/components/post-title";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -19,6 +19,23 @@ export default function Index({ markers, MAPBOX_TOKEN }) {
       <Container>
         <Header />
         <PostTitle>Map</PostTitle>
+        <section className="rounded-md border shadow-sm border-gray-100 p-2 mb-10">
+          <div className="flex flex-wrap gap-x-6 ">
+            {Object.keys(CATEGORY_COLORS_TAILWIND).map((category) => (
+              <div className="flex p-2 gap-x-2">
+                <div
+                  className={`rounded-full w-12 h-12 bg-${CATEGORY_COLORS_TAILWIND[category]}`}
+                />
+                <p
+                  className={`font-bold self-center text-${CATEGORY_COLORS_TAILWIND[category]}`}
+                >
+                  {category}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <Map markers={markers} token={MAPBOX_TOKEN} />
       </Container>
     </Layout>

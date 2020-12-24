@@ -6,6 +6,7 @@ import MapGL, {
   Popup,
   Source,
 } from "@urbica/react-map-gl";
+import { CATEGORY_COLORS } from "@/lib/constants";
 
 export default function Map({ token, markers }) {
   const [viewport, setViewport] = useState({
@@ -41,15 +42,15 @@ export default function Map({ token, markers }) {
             "match",
             ["get", "category"],
             "restaurants-and-bars",
-            "#7C3AED",
+            CATEGORY_COLORS["restaurants-and-bars"],
             "speakeasies",
-            "#2563EB",
+            CATEGORY_COLORS["speakeasies"],
             "activities",
-            "#10B981",
+            CATEGORY_COLORS["activities"],
             "coffee-shops",
-            "#F59E0B",
+            CATEGORY_COLORS["coffee-shops"],
             "museums",
-            "#EC4899",
+            CATEGORY_COLORS["museums"],
             "#000",
           ],
         }}
