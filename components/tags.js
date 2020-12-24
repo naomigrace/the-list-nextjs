@@ -22,3 +22,12 @@ export function CategoryTag(props) {
     />
   );
 }
+
+export function BlankTagToUtilizeColors(props) {
+  return (
+    <span
+      className="blue-600 green-500 yellow-500 pink-500 red-500"
+      {...props}
+    />
+  );
+}

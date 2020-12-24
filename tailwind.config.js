@@ -8,18 +8,6 @@ module.exports = {
         sans:
           '-apple-system, "Helvetica Neue", "Segoe UI", Roboto, Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
       },
-      colors: {
-        transparent: "transparent",
-        black: colors.black,
-        white: colors.white,
-        gray: colors.trueGray,
-        red: colors.rose,
-        yellow: colors.amber,
-        green: colors.emerald,
-        blue: colors.blue,
-        purple: colors.indigo,
-        pink: colors.pink,
-      },
       spacing: {
         28: "7rem",
       },
