@@ -19,7 +19,6 @@ export default function Layout({ preview, children, className }) {
               <div>
                 <Avatar
                   onClick={() => {
-                    console.log("CLICKED");
                     handleLogout(setUsername, router);
                   }}
                   username={username}
