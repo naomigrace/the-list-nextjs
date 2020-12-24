@@ -1,4 +1,4 @@
-import { CMS_NAME } from "@/lib/constants";
+import { CATEGORY_COLORS_TAILWIND, CMS_NAME } from "@/lib/constants";
 import Head from "next/head";
 import React from "react";
 import ActionTable from "./action-table";
@@ -57,6 +57,11 @@ export default function SlugTemplate({
               href={`/actions/[slug]`}
               as={`/actions/${action.slug}`}
               title={action.title}
+              color={
+                type === "category"
+                  ? `bg-${CATEGORY_COLORS_TAILWIND[whichType]}`
+                  : undefined
+              }
             />
           ))}
         </SectionGrid>
