@@ -22,8 +22,8 @@ export default function Index({ categories, preview }) {
           {categories.map((category) => (
             <CoverImage
               imageUrl={category.cover.url}
-              href={`category/[category]`}
-              as={`category/${category.slug}`}
+              href={`/category/[category]`}
+              as={`/category/${category.slug}`}
               title={category.title}
             />
           ))}

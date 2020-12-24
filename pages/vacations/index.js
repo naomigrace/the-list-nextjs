@@ -22,8 +22,8 @@ export default function Index({ vacations, preview }) {
           {vacations.map((vacation) => (
             <CoverImage
               imageUrl={vacation.cover.url}
-              href={`vacations/[vacation]`}
-              as={`vacations/${vacation.slug}`}
+              href={`/vacations/[vacation]`}
+              as={`/vacations/${vacation.slug}`}
               title={vacation.title}
             />
           ))}

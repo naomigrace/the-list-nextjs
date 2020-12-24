@@ -7,24 +7,26 @@ import ActionTable from "@/components/action-table";
 import Header from "@/components/header";
 import PostTitle from "@/components/post-title";
 import cookies from "next-cookies";
+import CoverImage from "@/components/cover-image";
+import SectionGrid from "@/components/section-grid";
+import SlugTemplate from "@/components/SlugTemplate";
 
-export default function Index({ neighborhood, actions, preview }) {
+export default function NeighborhoodInnerSlug({
+  neighborhood,
+  actions,
+  preview,
+  markers,
+  MAPBOX_TOKEN,
+}) {
   return (
-    <Layout preview={preview}>
-      <Head>
-        <title>
-          View Actions under {neighborhood}| {CMS_NAME}
-        </title>
-      </Head>
-
-      <Container>
-        <Header />
-        <PostTitle>{neighborhood}</PostTitle>
-        <section className="flex-col md:flex-row flex space-y-6 md:space-y-0 md:space-x-6 items-center md:justify-between mt-16 mb-16 md:mb-12">
-          <ActionTable actions={actions} />
-        </section>
-      </Container>
-    </Layout>
+    <SlugTemplate
+      preview={preview}
+      actions={actions}
+      type="neighborhood"
+      whichType={neighborhood}
+      markers={markers}
+      token={MAPBOX_TOKEN}
+    />
   );
 }
 
@@ -41,12 +43,15 @@ export async function getServerSideProps({
       params.neighborhood,
       preview
     );
+    const features = actions.map((action) => action.geojson);
 
     return {
       props: {
         preview,
         neighborhood: params.neighborhood,
         actions,
+        markers: { type: "FeatureCollection", features },
+        MAPBOX_TOKEN: process.env.MAPBOX_TOKEN,
       },
     };
   } catch (e) {
