@@ -50,11 +50,12 @@ export async function getServerSideProps({
       },
     };
   } catch (e) {
-    console.log("ERROR", e);
-    res.writeHead(302, { Location: "/login" });
-    res.end();
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
   }
-  return {
-    props: {},
-  };
+}
 }

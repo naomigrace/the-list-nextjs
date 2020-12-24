@@ -116,11 +116,11 @@ export async function getServerSideProps({ res, ...ctx }) {
       },
     };
   } catch (e) {
-    console.log("ERROR", e);
-    res.writeHead(302, { Location: "/login" });
-    res.end();
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
   }
-  return {
-    props: {},
-  };
 }

@@ -58,6 +58,7 @@ export default function Index({ allActions, images, preview }) {
 
 export async function getServerSideProps({ preview = null, res, ...ctx }) {
   const { jwt } = cookies(ctx);
+
   try {
     const { actions } = (await getAllActions(jwt)) || [];
     const { homepage } = (await getHomepageImages(jwt)) || [];
@@ -74,11 +75,11 @@ export async function getServerSideProps({ preview = null, res, ...ctx }) {
       },
     };
   } catch (e) {
-    console.log("ERROR", e);
-    res.writeHead(302, { Location: "/login" });
-    res.end();
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
   }
-  return {
-    props: {},
-  };
 }
