@@ -25,7 +25,7 @@ export default function Index({ categories, preview }) {
               href={`/category/[category]`}
               as={`/category/${category.slug}`}
               title={category.title}
-              color={CATEGORY_COLORS_TAILWIND[category.slug]}
+              color={`bg-${CATEGORY_COLORS_TAILWIND[category.slug]}`}
             />
           ))}
         </SectionGrid>
