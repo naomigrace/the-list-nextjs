@@ -41,34 +41,34 @@ export default function NewAction({ jwt, neighborhoods, categories }) {
         <Header />
         <PostTitle>New Action</PostTitle>
         <form
-          className="flex flex-col gap-y-4 items-start"
+          className="flex flex-col gap-y-4"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="flex flex-col gap-y-2">
+          <div className="flex flex-col gap-y-2 mt-6">
             <label>Title *</label>
             <input
               name="title"
               type="text"
-              className="border-2 rounded-xl w-96"
+              className="border-2 rounded-xl lg:w-96"
               ref={register({ required: true })}
             />
           </div>
 
-          <div className="flex flex-col gap-y-2">
+          <div className="flex flex-col gap-y-2 mt-6">
             <label>Date</label>
             <input
               name="date"
               type="date"
-              className="border-2 rounded-xl w-94"
+              className="border-2 rounded-xl lg:w-96"
               ref={register}
             />
           </div>
 
-          <div className="flex flex-col gap-y-2">
+          <div className="flex flex-col gap-y-2 mt-6">
             <label>Categories</label>
             <select
               name="categories"
-              className="border-2 rounded-xl w-96"
+              className="border-2 rounded-xl lg:w-96"
               multiple
               ref={register}
             >
@@ -80,21 +80,21 @@ export default function NewAction({ jwt, neighborhoods, categories }) {
             </select>
           </div>
 
-          <div className="flex flex-col gap-y-2">
+          <div className="flex flex-col gap-y-2 mt-6">
             <label>Location (address)</label>
             <input
               name="location"
               type="text"
-              className="border-2 rounded-xl w-96"
+              className="border-2 rounded-xl lg:w-96"
               ref={register}
             />
           </div>
 
-          <div className="flex flex-col gap-y-2">
+          <div className="flex flex-col gap-y-2 mt-6">
             <label>Neighborhood</label>
             <select
               name="neighborhood"
-              className="border-2 rounded-xl w-94"
+              className="border-2 rounded-xl lg:w-96"
               ref={register}
             >
               {neighborhoods.map((option) => (
@@ -105,21 +105,21 @@ export default function NewAction({ jwt, neighborhoods, categories }) {
             </select>
           </div>
 
-          <div className="flex flex-col gap-y-2  ">
+          <div className="flex flex-col gap-y-2 mt-6  ">
             <label>Description</label>
             <textarea
               name="description"
-              className="border-2 rounded-xl w-96"
+              className="border-2 rounded-xl lg:w-96"
               rows="3"
               ref={register}
             />
           </div>
 
-          <div className="flex flex-col gap-y-2">
+          <div className="flex flex-col gap-y-2 mt-6">
             <label>Completed</label>
             <select
               name="completed"
-              className="border-2 rounded-xl w-94"
+              className="border-2 rounded-xl lg:w-96"
               ref={register}
             >
               <option value={false}>No</option>
