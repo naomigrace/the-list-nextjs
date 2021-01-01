@@ -7,12 +7,9 @@ export default function CoverImage({
   href,
   color = "bg-purple-600",
 }) {
-  let getImageUrl = null;
-  if (imageUrl) {
-    getImageUrl = getImageUrl = `${
-      imageUrl.startsWith("/") ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ""
-    }${imageUrl}`;
-  }
+  const getImageUrl = `${
+    imageUrl.startsWith("/") ? process.env.NEXT_PUBLIC_STRAPI_API_URL : "/"
+  }${imageUrl}`;
 
   if (href) {
     return (
@@ -21,6 +18,7 @@ export default function CoverImage({
           <div
             style={{
               maxHeight: "14rem",
+              minHeight: "10rem",
             }}
             className={`z-0 h-full max-h-52 transition duration-500 bg-black hover:${color} flex-1 sm:mx-0 max-w-xs relative rounded-xl cursor-pointer hover:shadow-lg`}
           >
@@ -29,15 +27,11 @@ export default function CoverImage({
                 {title}
               </h2>
             </div>
-            {getImageUrl ? (
-              <img
-                src={getImageUrl}
-                alt={title}
-                className="rounded-xl opacity-25 w-full h-full object-cover"
-              />
-            ) : (
-              <div className="rounded-xl opacity-25 w-full h-full bg-purple-800" />
-            )}
+            <img
+              src={getImageUrl}
+              alt={title}
+              className="rounded-xl opacity-25 w-full h-full object-cover"
+            />
           </div>
         </a>
       </Link>

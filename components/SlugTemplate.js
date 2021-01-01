@@ -53,7 +53,7 @@ export default function SlugTemplate({
         <SectionGrid>
           {actions.map((action) => (
             <CoverImage
-              imageUrl={action.cover?.url}
+              imageUrl={action.cover ? action.cover.url : "defaultImage.png"}
               href={`/actions/[slug]`}
               as={`/actions/${action.slug}`}
               title={action.title}

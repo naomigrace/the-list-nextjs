@@ -36,7 +36,12 @@ export default function Vacation({ vacation, moreVacations, preview }) {
                 <meta property="og:image" content={vacation.ogImage.url} />
               </Head>
               <PostHeader title={vacation.title} location={vacation.location} />
-              <PostImage imageUrl={vacation.cover?.url} title="" />
+              <PostImage
+                imageUrl={
+                  vacation.cover ? vacation.cover.url : "defaultImage.png"
+                }
+                title=""
+              />
               <PostBody content={vacation.content} />
               <section>
                 {vacation.location && (

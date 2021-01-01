@@ -41,7 +41,10 @@ export default function Post({ action, moreActions, preview }) {
                 neighborhood={action.neighborhood.name}
                 location={action.location}
               />
-              <PostImage imageUrl={action.cover?.url} title="" />
+              <PostImage
+                imageUrl={action.cover ? action.cover.url : "defaultImage.png"}
+                title=""
+              />
               <PostBody content={action.content} />
               <section>
                 {action.year && (
