@@ -20,16 +20,20 @@ export default function NewAction({ jwt, neighborhoods, categories }) {
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = async (data) => {
-    const dataWithoutEmptyValues = Object.fromEntries(
-      Object.entries(data).filter(([_, v]) => v != "")
-    );
-    dataWithoutEmptyValues["completed"] =
-      dataWithoutEmptyValues["completed"] === "true" ? true : false;
-    const success = await createAction(jwt, dataWithoutEmptyValues);
-    console.log(success);
-    if (success && success.createAction && success.createAction.action.id) {
-      alert("Action created successfully.");
-      router.push("/");
+    try {
+      const dataWithoutEmptyValues = Object.fromEntries(
+        Object.entries(data).filter(([_, v]) => v != "")
+      );
+      dataWithoutEmptyValues["completed"] =
+        dataWithoutEmptyValues["completed"] === "true" ? true : false;
+      const success = await createAction(jwt, dataWithoutEmptyValues);
+      console.log(success);
+      if (success && success.createAction && success.createAction.action.id) {
+        alert("Action created successfully.");
+        router.push("/");
+      }
+    } catch (e) {
+      console.error(e);
     }
   };
   return (
@@ -70,10 +74,10 @@ export default function NewAction({ jwt, neighborhoods, categories }) {
               name="categories"
               className="border-2 rounded-xl lg:w-96"
               multiple
-              ref={register}
+              ref={register({ required: true })}
             >
               {categories.map((option) => (
-                <option value={option.slug} key={option.slug}>
+                <option value={option.id} key={option.id}>
                   {option.title}
                 </option>
               ))}
@@ -98,7 +102,7 @@ export default function NewAction({ jwt, neighborhoods, categories }) {
               ref={register}
             >
               {neighborhoods.map((option) => (
-                <option value={option.slug} key={option.slug}>
+                <option value={option.id} key={option.id}>
                   {option.name}
                 </option>
               ))}
@@ -129,7 +133,7 @@ export default function NewAction({ jwt, neighborhoods, categories }) {
 
           <button
             type="submit"
-            className="mt-2 px-6 py-4 text-xl bg-gray-900 text-white rounded-xl"
+            className="mt-6 px-6 py-4 text-xl bg-gray-900 text-white rounded-xl"
           >
             Add New Action
           </button>
