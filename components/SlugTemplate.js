@@ -33,13 +33,13 @@ export default function SlugTemplate({
         <PostTitle>{whichType}</PostTitle>
         <div className="sticky top-0 py-2 -mt-6 mb-4 z-10 flex gap-x-4 tracking-widest w-full text-gray-400">
           {whichType}
-          <a href="#covers" className="font-bold">
+          <a href="#covers" className="font-bold ml-3 mr-3">
             covers
           </a>
-          <a href="#table" className="font-bold hidden md:block">
+          <a href="#table" className="font-bold hidden md:block  mr-3">
             table
           </a>
-          <a href="#map" className="font-bold">
+          <a href="#map" className="font-bold  mr-3">
             map
           </a>
         </div>
@@ -60,7 +60,7 @@ export default function SlugTemplate({
               color={
                 type === "category"
                   ? `bg-${CATEGORY_COLORS_TAILWIND[whichType]}`
-                  : undefined
+                  : `bg-black`
               }
             />
           ))}
