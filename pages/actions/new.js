@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Container from "@/components/container";
 import Layout from "@/components/layout";
 import Head from "next/head";
@@ -16,10 +16,11 @@ import { useRouter } from "next/router";
 
 export default function NewAction({ jwt, neighborhoods, categories }) {
   const router = useRouter();
-
+  const [loading, setLoading] = useState(false);
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = async (data) => {
+    setLoading(true);
     try {
       const dataWithoutEmptyValues = Object.fromEntries(
         Object.entries(data).filter(([_, v]) => v != "")
@@ -31,6 +32,7 @@ export default function NewAction({ jwt, neighborhoods, categories }) {
       if (success && success.createAction && success.createAction.action.id) {
         alert("Action created successfully.");
         router.push("/");
+        setLoading(false);
       }
     } catch (e) {
       console.error(e);
@@ -135,7 +137,7 @@ export default function NewAction({ jwt, neighborhoods, categories }) {
             type="submit"
             className="mt-6 px-6 py-4 text-xl bg-gray-900 text-white rounded-xl"
           >
-            Add New Action
+            {loading ? "Adding..." : "Add New Action"}
           </button>
         </form>
       </Container>
