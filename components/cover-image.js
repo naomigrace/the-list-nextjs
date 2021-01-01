@@ -1,3 +1,4 @@
+import { getImageUrl } from "@/lib/imageUrl";
 import Link from "next/link";
 
 export default function CoverImage({
@@ -7,10 +8,6 @@ export default function CoverImage({
   href,
   color = "bg-purple-600",
 }) {
-  const getImageUrl = `${
-    imageUrl.startsWith("/") ? process.env.NEXT_PUBLIC_STRAPI_API_URL : "/"
-  }${imageUrl}`;
-
   if (href) {
     return (
       <Link as={as} href={href} className="inline-block">
@@ -27,15 +24,17 @@ export default function CoverImage({
                 {title}
               </h2>
             </div>
-            <img
-              src={getImageUrl}
-              alt={title}
-              className="rounded-xl opacity-25 w-full h-full object-cover"
-            />
+            {imageUrl && (
+              <img
+                src={getImageUrl(imageUrl)}
+                alt={title}
+                className="rounded-xl opacity-25 w-full h-full object-cover"
+              />
+            )}
           </div>
         </a>
       </Link>
     );
   }
-  return <img src={getImageUrl} alt={title} className="rounded-xl" />;
+  return <img src={getImageUrl(imageUrl)} alt={title} className="rounded-xl" />;
 }

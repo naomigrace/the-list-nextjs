@@ -21,9 +21,7 @@ export default function Index({ vacations, preview }) {
         <SectionGrid>
           {vacations.map((vacation) => (
             <CoverImage
-              imageUrl={
-                vacation.cover ? vacation.cover.url : "defaultImage.png"
-              }
+              imageUrl={vacation.cover?.url}
               href={`/vacations/[vacation]`}
               as={`/vacations/${vacation.slug}`}
               title={vacation.title}
