@@ -7,7 +7,6 @@ export default function Header() {
       <Link href="/">
         <a className="hover:underline">{CMS_NAME}</a>
       </Link>
-      .
     </h2>
   );
 }

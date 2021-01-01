@@ -34,14 +34,14 @@ export default function Post({ action, moreActions, preview }) {
                 <title>
                   {action.title} | {CMS_NAME}
                 </title>
-                <meta property="og:image" content={action.ogImage.url} />
+                <meta property="og:image" content={action.ogImage?.url} />
               </Head>
               <PostHeader
                 title={action.title}
                 neighborhood={action.neighborhood.name}
                 location={action.location}
               />
-              <PostImage imageUrl={action.cover.url} title="" />
+              <PostImage imageUrl={action.cover?.url} title="" />
               <PostBody content={action.content} />
               <section>
                 {action.year && (

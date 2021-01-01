@@ -7,9 +7,12 @@ export default function CoverImage({
   href,
   color = "bg-purple-600",
 }) {
-  const getImageUrl = `${
-    imageUrl.startsWith("/") ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ""
-  }${imageUrl}`;
+  let getImageUrl = null;
+  if (imageUrl) {
+    getImageUrl = getImageUrl = `${
+      imageUrl.startsWith("/") ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ""
+    }${imageUrl}`;
+  }
 
   if (href) {
     return (
@@ -26,12 +29,15 @@ export default function CoverImage({
                 {title}
               </h2>
             </div>
-
-            <img
-              src={getImageUrl}
-              alt={title}
-              className="rounded-xl opacity-25 w-full h-full object-cover"
-            />
+            {getImageUrl ? (
+              <img
+                src={getImageUrl}
+                alt={title}
+                className="rounded-xl opacity-25 w-full h-full object-cover"
+              />
+            ) : (
+              <div className="rounded-xl opacity-25 w-full h-full bg-purple-800" />
+            )}
           </div>
         </a>
       </Link>

@@ -1,14 +1,5 @@
-import Container from "@/components/container";
-import Layout from "@/components/layout";
 import { getActionsByNeighborhood, getAllNeighborhoodNames } from "@/lib/api";
-import Head from "next/head";
-import { CMS_NAME } from "@/lib/constants";
-import ActionTable from "@/components/action-table";
-import Header from "@/components/header";
-import PostTitle from "@/components/post-title";
 import cookies from "next-cookies";
-import CoverImage from "@/components/cover-image";
-import SectionGrid from "@/components/section-grid";
 import SlugTemplate from "@/components/SlugTemplate";
 
 export default function NeighborhoodInnerSlug({

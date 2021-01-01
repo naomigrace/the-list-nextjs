@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import Container from "@/components/container";
 import PostBody from "@/components/post-body";
-import MoreStories from "@/components/more-stories";
 import Header from "@/components/header";
 import PostHeader from "@/components/post-header";
 import SectionSeparator from "@/components/section-separator";
@@ -13,7 +12,7 @@ import Head from "next/head";
 import { CMS_NAME } from "@/lib/constants";
 import markdownToHtml from "@/lib/markdownToHtml";
 import PostImage from "@/components/post-image";
-import { CategoryTag, CompletedTag, PendingTag } from "@/components/tags";
+import { CompletedTag, PendingTag } from "@/components/tags";
 import cookies from "next-cookies";
 
 export default function Vacation({ vacation, moreVacations, preview }) {
@@ -37,7 +36,7 @@ export default function Vacation({ vacation, moreVacations, preview }) {
                 <meta property="og:image" content={vacation.ogImage.url} />
               </Head>
               <PostHeader title={vacation.title} location={vacation.location} />
-              <PostImage imageUrl={vacation.cover.url} title="" />
+              <PostImage imageUrl={vacation.cover?.url} title="" />
               <PostBody content={vacation.content} />
               <section>
                 {vacation.location && (
@@ -69,9 +68,6 @@ export default function Vacation({ vacation, moreVacations, preview }) {
               </section>
             </article>
             <SectionSeparator />
-            {/* {moreVacations.length > 0 && (
-              <MoreStories vacations={moreVacations} />
-            )} */}
           </>
         )}
       </Container>

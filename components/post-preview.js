@@ -11,7 +11,7 @@ export default function PostPreview({
   return (
     <div className="max-w-sm">
       <div className="mb-3">
-        <CoverImage slug={slug} title={title} imageUrl={coverImage.url} />
+        <CoverImage slug={slug} title={title} imageUrl={coverImage?.url} />
       </div>
       <h3 className="text-3xl mb-2 leading-snug">
         <Link as={`/actions/${slug}`} href="/actions/[slug]">

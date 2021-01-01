@@ -1,5 +1,6 @@
 import { handleLogout } from "@/lib/auth";
 import UserContext from "@/lib/context";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import Avatar from "./avatar";
@@ -16,7 +17,14 @@ export default function Layout({ preview, children, className }) {
         {username && (
           <div className="fixed top-0 right-0 p-4 z-50">
             <div className="relative inline-block text-left">
-              <div>
+              <div className="flex flex-row gap-x-2">
+                <Link href="/actions/new" passHref>
+                  <div
+                    className={`flex items-center w-14 h-14 justify-center z-50 rounded-full ring-2  bg-gray-700 ring-gray-50 cursor-pointer text-white`}
+                  >
+                    <span className="text-3xl -mt-1">+</span>
+                  </div>
+                </Link>
                 <Avatar
                   onClick={() => {
                     handleLogout(setUsername, router);

@@ -21,7 +21,7 @@ export default function Index({ categories, preview }) {
         <SectionGrid>
           {categories.map((category) => (
             <CoverImage
-              imageUrl={category.cover.url}
+              imageUrl={category.cover?.url}
               href={`/category/[category]`}
               as={`/category/${category.slug}`}
               title={category.title}

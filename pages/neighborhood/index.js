@@ -1,6 +1,9 @@
 import Container from "@/components/container";
 import Layout from "@/components/layout";
-import { getAllNeighborhoodNames } from "@/lib/api";
+import {
+  getAllNeighborhoodNames,
+  getAllNeighborhoodNamesWithActions,
+} from "@/lib/api";
 import Head from "next/head";
 import { CMS_NAME } from "@/lib/constants";
 import ColorLink from "@/components/color-link";
@@ -24,6 +27,7 @@ export default function Index({ neighborhoods, preview }) {
               href={`neighborhood/[neighborhood]`}
               as={`neighborhood/${n.slug}`}
               title={n.name}
+              count={n.actions.length}
             />
           ))}
         </section>
@@ -35,7 +39,8 @@ export default function Index({ neighborhoods, preview }) {
 export async function getServerSideProps({ res, ...ctx }) {
   const { jwt } = cookies(ctx);
   try {
-    const { neighborhoods } = (await getAllNeighborhoodNames(jwt)) || [];
+    const { neighborhoods } =
+      (await getAllNeighborhoodNamesWithActions(jwt)) || [];
     return {
       props: { neighborhoods },
     };
